@@ -1,0 +1,10 @@
+{{#each posts}}
+    <div class="post">
+        <div class="title-content clearfix">
+            <span class="post-title">{{this.title}}</span>
+            <span class="post-date">{{formatDate this.date}}</span>
+        </div>
+        <div class="post-body">{{#formatPost this.body}}{{/formatPost}}</div>
+        {{#ownsPost this.creator this._id}}{{/ownsPost}}
+    </div>
+{{/each}}

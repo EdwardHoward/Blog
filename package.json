@@ -1,0 +1,21 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "A simple blog",
+  "main": "server.js",
+  "dependencies":{
+    "express": "4.13.4",
+    "mongoose": "4.6.3",
+    "moment": "2.15.1",
+    "express-session": "1.14.1",
+    "body-parser": "1.15.2",
+    "express-handlebars": "3.0.0",
+    "password-hash": "1.2.2",
+    "markdown": "0.5.0"
+  }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Edward Howard <edwardhoward11@gmail.com>",
+  "license": "ISC"
+}

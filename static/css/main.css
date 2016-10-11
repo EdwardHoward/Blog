@@ -1,0 +1,134 @@
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body,html{
+    padding: 0px;
+    margin: 0px;
+    background: #f9f9f9;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.header{
+    width: 100%;
+    background: #e0e0e0;
+    height: 50px;
+}
+
+.content{
+    width: 80%;
+    padding: 20px;
+    background: white;
+    margin: 0 auto;
+}
+
+.post{
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    background: #f6f6f6;
+    margin-bottom: 20px;
+}
+
+.post:last-child{
+    margin-bottom: 0px;
+}
+
+.title-content {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #f6f6f6;
+    padding: 10px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.post-title{
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.post-date{
+    font-size: 90%;
+    color: #a4a4a4;
+    float: right;
+}
+
+.post-body{
+    padding: 10px;
+    background: #fafafa;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+form{
+    margin: 0 auto;
+    text-align: center;
+    width: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    background: #f6f6f6;
+}
+
+form input:not([type="submit"]), form textarea{
+    width: 100%;
+}
+
+form input, form textarea{
+    margin-top: 10px;
+    text-align: center;
+}
+
+form textarea{
+    height: 200px;
+    text-align: left;
+}
+
+.submit input{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.submit{
+    text-align: right;
+}
+
+.login-form{
+    width: 200px;
+}
+
+.post-form{
+    width: 400px;
+}
+
+.post-form input{
+    text-align: left;
+}
+
+.options{
+    text-align: right;
+    font-size: 90%;
+    padding: 5px;
+}
+
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+@media (max-width: 1024px) {
+    .content{
+        width: 100%;
+        padding: 5px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+/*    .post{
+        padding: 10px;
+    }*/
+}
