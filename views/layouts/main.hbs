@@ -1,14 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui=1">
     <meta charset="UTF-8">
     <title>Blog</title>
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/static/css/main.css" type="text/css" />
 </head>
 <body>
-    <div class="header"></div>
+    <div class="header">
+        {{#if showActions}}
+        <div class="action">
+            {{#if loggedIn}}<a href="/admin">Create New Post</a> | <a href="/logout">Logout</a>{{else}}<a href="/admin">Login</a>{{/if}}
+        </div>
+        {{/if}}
+        {{#if showHome}}
+        <div class="action">
+            <a href="/">Home</a>
+        </div>
+        {{/if}}
+    </div>
     <div class="content">
         {{{body}}}
     </div>

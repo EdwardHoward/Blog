@@ -40,11 +40,11 @@ app.get('/', Route.index);
 app.get('/admin', checkAuth, Route.admin);
 
 // Get all posts for a user
-app.get('/user/:username', Route.getUserPosts);
+app.get('/posts/:username', Route.getUserPosts);
 
 // Add/remove posts
-app.post('/addpost', checkAuth, Route.addPost);
-app.get('/removepost/:postid', checkAuth, Route.removePost);
+app.post('/posts', checkAuth, Route.addPost);
+app.get('/posts/remove/:postid', checkAuth, Route.removePost);
 
 // login/logout
 app.post('/login', Route.login);
@@ -52,7 +52,7 @@ app.get('/logout', Route.logout);
 
 function checkAuth(req, res, next){
     if(!req.session.user_id){
-        res.render('login');
+        res.render('login', {showHome: true});
     }else{
         next();
     }

@@ -3,39 +3,46 @@ var Model = require(__dirname + '/models'),
     markdown = require('markdown').markdown,
     pwd = require('password-hash');
     
+function renderPosts(req, res, query){
+    Model.Post.find({$query: query, $orderby: {date: -1}}, function(err, posts){
+        res.render('index', {
+            posts: posts,
+            loggedIn: req.session.user_id != null,
+            showActions: true,
+            helpers: {
+                formatDate: function(date){
+                    var str = Moment(date).format("MMMM Do YYYY");
+                    return str;
+                },
+                formatPost: function(post){
+                    return markdown.toHTML(post);
+                },
+                ownsPost: function(creator, postId){
+                    if(req.session.user_id == creator){
+                        return '<div class="options"><a href="/posts/remove/'+postId+'">Remove</a></div>';
+                    }
+                    return '';
+                }
+            }
+        });
+    });
+}
 module.exports = {
     index: function(req, res){
-        Model.Post.find({$query: {}, $orderby: {date: -1}}, function(err, posts){
-            res.render('index', {
-                posts: posts,
-                helpers:{
-                    formatDate: function(date){
-                        var str = Moment(date).format("MMMM Do YYYY");
-                        return str;
-                    },
-                    formatPost: function(post){
-                        return markdown.toHTML(post);
-                    },
-                    ownsPost: function(creator, postId){
-                        if(req.session.user_id == creator){
-                            return '<div class="options"><a href="/removepost/'+postId+'">Remove</a></div>';
-                        }
-                        return '';
-                    }
-                }
-            });
-        });
-        
+        renderPosts(req, res, {});
     },
     admin: function(req, res){
-        res.render('admin');
+        res.render('admin', {showHome: true});
     },
     addPost: function(req, res){
         var post = req.body;
+        if(post.title.trim().length <= 0 && post.body.trim().length <= 0){
+            res.redirect('/admin');
+            return;
+        }
         Model.User.findOne({_id: req.session.user_id}, function(err, user){
             if(err){
                 res.send(err);
-                return;  
             } 
             var p = new Model.Post({
                 title: post.title,
@@ -60,17 +67,11 @@ module.exports = {
     },
     getUserPosts: function(req, res){
         Model.User.findOne({name: req.params.username}, function(err, user){
-            Model.Post.find({creator: user._id}, function(err, posts){
-                res.render('index', {
-                    posts: posts,
-                    helpers:{
-                        formatDate: function(date){
-                            var str = Moment(date).format("MMMM Do YYYY, h:mm a");
-                            return str;
-                        }
-                    }
-                });
-            });
+            if(!err && user){
+                renderPosts(req, res, {creator: user._id});
+            }else{
+                res.redirect('/');
+            }
         });
     },
     login: function(req, res){
