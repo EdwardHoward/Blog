@@ -3,13 +3,24 @@ var Model = require(__dirname + '/models'),
     markdown = require('markdown').markdown,
     pwd = require('password-hash');
     
-function renderPosts(req, res, query){
-    Model.Post.find({$query: query, $orderby: {date: -1}}, function(err, posts){
+
+
+function renderPosts(req, res, query, showHome){
+    Model.Post.find(query, function(err, posts){
         res.render('index', {
             posts: posts,
             loggedIn: req.session.user_id != null,
             showActions: true,
+            showHome: showHome,
             helpers: {
+                createTitleLink: function(title){
+                    var ta = title.replace(/\s/g, '-');
+                    return ta;
+                },
+                toUpperCase: function(title){
+                    title = title.replace(/(\b[a-z](?!\s))/g, function(x){ return x.toUpperCase(); });
+                    return title;
+                },
                 formatDate: function(date){
                     var str = Moment(date).format("MMMM Do YYYY");
                     return str;
@@ -17,15 +28,15 @@ function renderPosts(req, res, query){
                 formatPost: function(post){
                     return markdown.toHTML(post);
                 },
-                ownsPost: function(creator, postId){
+                ownsPost: function(creator, options){
                     if(req.session.user_id == creator){
-                        return '<div class="options"><a href="/posts/remove/'+postId+'">Remove</a></div>';
+                        return options.fn(this);//this;//'<div class="options"><a href="/posts/remove/'+postId+'"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
                     }
                     return '';
                 }
             }
         });
-    });
+    }).sort({date: -1});
 }
 module.exports = {
     index: function(req, res){
@@ -45,7 +56,7 @@ module.exports = {
                 res.send(err);
             } 
             var p = new Model.Post({
-                title: post.title,
+                title: post.title.toLowerCase(),
                 body: post.body,
                 creator: user._id
             });
@@ -64,6 +75,15 @@ module.exports = {
                 }
             }
         });
+    },
+    getPostByName: function(req, res){
+        var name = req.params.posttitle.replace('-', ' ');
+        //renderPosts(req, res, {$text: {$search: name}});
+        renderPosts(req, res, {title: name}, true);
+    },
+    searchPostsByName: function(req, res){
+        var name = req.params.query.replace('-', ' ');
+        renderPosts(req, res, {$text: {$search: name}});
     },
     getUserPosts: function(req, res){
         Model.User.findOne({name: req.params.username}, function(err, user){

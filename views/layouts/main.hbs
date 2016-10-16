@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <title>Blog</title>
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/main.css" type="text/css" />
 </head>
 <body>
     <div class="header">
         {{#if showActions}}
         <div class="action">
-            {{#if loggedIn}}<a href="/admin">Create New Post</a> | <a href="/logout">Logout</a>{{else}}<a href="/admin">Login</a>{{/if}}
+            {{#if loggedIn}}<a title="New Post" href="/admin"><i class="fa fa-plus" aria-hidden="true"></i></a><a title="Sign Out" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>{{else}}<a title="Sign In"  href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i></a>{{/if}}
         </div>
         {{/if}}
         {{#if showHome}}
         <div class="action">
-            <a href="/">Home</a>
+            <a title="Home" href="/"><i class="fa fa-home" aria-hidden="true"></i></a>
         </div>
         {{/if}}
     </div>
