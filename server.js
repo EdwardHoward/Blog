@@ -5,6 +5,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     handlebars = require('express-handlebars'),
     Route = require(__dirname+'/routes');
+    
 
 var config;
 
@@ -17,6 +18,7 @@ try{
 }
 
 mongoose.connect(config.mongoAddress);
+
 
 app.use(session({
     resave: false,
@@ -47,9 +49,11 @@ app.get('/posts/:posttitle', Route.getPostByName);
 
 // Search posts by title
 app.get('/posts/search/:query', Route.searchPostsByName);
+
 // Add/remove posts
 app.post('/posts', checkAuth, Route.addPost);
 app.get('/posts/remove/:postid', checkAuth, Route.removePost);
+app.get('/posts/edit/:postid', checkAuth, Route.editPost);
 
 // login/logout
 app.post('/login', Route.login);

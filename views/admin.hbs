@@ -1,5 +1,9 @@
-<form class="post-form" method="post" action="posts">
-    <div><input name="title" placeholder="Title" /></div>
-    <div><textarea name="body" id="body" placeholder="Body"></textarea></div>
+<form class="post-form" method="post" action="/posts">
+    <div><input name="title" placeholder="Title" value="{{title}}"/></div>
+    <div><textarea name="body" id="body" placeholder="Body">{{body}}</textarea></div>
+    {{#if id}}
+    <input type="hidden" name="id" value="{{id}}">
+    {{/if}}
+
     <div class="submit"><input type="submit" value="Post"/></div>
 </form>

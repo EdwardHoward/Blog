@@ -1,12 +1,15 @@
 {{#each posts}}
     <div class="post clearfix">
         <div class="title-content clearfix">
-            <span class="post-title"><a href='/posts/{{createTitleLink this.title}}'>{{toUpperCase this.title}}</a></span>
-            <span class="post-date">{{formatDate this.date}}</span>
+            <div class="post-title"><a href='/posts/{{createTitleLink this.title}}'>{{toUpperCase this.title}}</a></div>
+            <div class="post-date">{{formatDate this.date}}</div>
         </div>
         <div class="post-body">{{#formatPost this.body}}{{/formatPost}}</div>
         {{#ownsPost this.creator}}
-        <div class="action"><a class="remove-post" title="Remove" href="/posts/remove/{{this._id}}"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+        <div class="action">
+            <a class="edit-post" title="Edit" href="/posts/edit/{{this._id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a class="remove-post" title="Remove" href="/posts/remove/{{this._id}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
         {{/ownsPost}}
     </div>
 {{/each}}

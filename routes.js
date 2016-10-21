@@ -1,7 +1,9 @@
 var Model = require(__dirname + '/models'),
+    Mongoose = require('mongoose'),
     Moment = require('moment'),
     markdown = require('markdown').markdown,
-    pwd = require('password-hash');
+    pwd = require('password-hash'),
+    sanitize = require('sanitize-html');
     
 
 
@@ -30,7 +32,7 @@ function renderPosts(req, res, query, showHome){
                 },
                 ownsPost: function(creator, options){
                     if(req.session.user_id == creator){
-                        return options.fn(this);//this;//'<div class="options"><a href="/posts/remove/'+postId+'"><i class="fa fa-times" aria-hidden="true"></i></a></div>';
+                        return options.fn(this);
                     }
                     return '';
                 }
@@ -51,22 +53,34 @@ module.exports = {
             res.redirect('/admin');
             return;
         }
-        Model.User.findOne({_id: req.session.user_id}, function(err, user){
-            if(err){
-                res.send(err);
-            } 
-            var p = new Model.Post({
-                title: post.title.toLowerCase(),
-                body: post.body,
-                creator: user._id
-            });
-            
+        
+        var postObject = {
+            title: sanitize(post.title.toLowerCase()),
+            body: sanitize(post.body),
+            creator: req.session.user_id
+        }
+
+        if(post.id == null){
+            var p = new Model.Post(postObject);
             p.save();
-            
-            res.redirect('/');
-        });
+        }else{
+
+            Model.Post.findOne({_id: Mongoose.Types.ObjectId(post.id)}, function(err, p){
+               if(!err && p != null){
+                p.title = sanitize(post.title.toLowerCase());
+                p.body = sanitize(post.body);
+                
+                p.save();
+               }else{
+                   console.log("Couldn't find post");
+               }
+            });
+        }
+        
+        res.redirect('/');
     },
     removePost: function(req, res){
+        console.log(req.params.postid);
         Model.Post.findOne({_id: req.params.postid}, function(err, post){
             if(!err && post != null){
                 if(post.creator == req.session.user_id){
@@ -76,9 +90,21 @@ module.exports = {
             }
         });
     },
+    editPost: function(req, res){
+        Model.Post.findOne({_id: req.params.postid}, function(err, post){
+            if(!err && post != null){
+                res.render('admin', {
+                    title: post.title,
+                    body: post.body,
+                    id: post._id
+                });
+            }else{
+                res.redirect('/admin');
+            }
+        });
+    },
     getPostByName: function(req, res){
         var name = req.params.posttitle.replace('-', ' ');
-        //renderPosts(req, res, {$text: {$search: name}});
         renderPosts(req, res, {title: name}, true);
     },
     searchPostsByName: function(req, res){
@@ -96,15 +122,18 @@ module.exports = {
     },
     login: function(req, res){
         var post = req.body;
-        
-        Model.User.findOne({name: post.user}, function(err, user){
-            if(!err && user != null){
-                if(pwd.verify(post.password, user.password)){
-                    req.session.user_id = user._id;
-                }
-            }
+        if(typeof post.user !== "string"){
             res.redirect('/admin');
-        })
+        }else{
+            Model.User.findOne({name: post.user}, function(err, user){
+                if(!err && user != null){
+                    if(pwd.verify(post.password, user.password)){
+                        req.session.user_id = user._id;
+                    }
+                }
+                res.redirect('/admin');
+            });
+        }
     },
     logout: function(req, res){
         req.session.user_id = null;

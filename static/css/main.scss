@@ -1,4 +1,8 @@
 $border-color: #dcdcdc;
+$header-color: #e0e0e0;//#455A64;
+$post-color: #f6f6f6;
+$text-color: #212121;
+$secondary-text-color: #a4a4a4;
 
 *, *:before, *:after{
     box-sizing: inherit;
@@ -20,10 +24,11 @@ a{
 
 .header{
     width: 100%;
-    background: #e0e0e0;
+    background: $header-color;
     height: 50px;
     line-height: 50px;
     padding: 0px 20px;
+    border-bottom: 1px solid #cdcdcd;
 }
 
 .action{
@@ -41,6 +46,10 @@ a{
         border-radius: 5px;
         margin-left: 10px;
         
+        &:first-child {
+            margin-left: 0px;
+        }
+        
         &:hover{
             background: #f0f0f0;
         }
@@ -53,39 +62,57 @@ a{
 
 .content{
     width: 80%;
-    padding: 20px;
-    background: white;
     margin: 0 auto;
 }
 
 .post{
     border-radius: 5px;
-    border: 1px solid $border-color;
-    background: #f6f6f6;
+    padding: 20px;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 2px -2px lightgrey;
     margin-bottom: 20px;
+    background: white;
+    border: 1px solid #ececec;
+    border-bottom: none;
     
     &:last-child{
         margin-bottom: 0px;
+        border-bottom: none;
+    }
+    
+    &:first-child{
+        margin-top: 20px;
     }
     
     .action{
-        padding: 5px;
-        width: 100%;
+        padding: 5px 5px;
+        //width: 100%;
         text-align: right;
-        border-top: 1px solid $border-color;
+        border: 1px solid $border-color;
+        background: #f6f6f6;
+        border-radius: 5px;
+        
+
         a {
             color: #ff4c4c;
             border-color: #ff8181;
+            margin-left: 5px;
+            
+            &:first-child{
+                margin-left: 0px;
+            }
+            
+            &.edit-post{
+                color: #4c72ff;
+                border-color: #819bff;
+            }
         }
     }
 }
 
 .title-content {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background: #f6f6f6;
-    padding: 10px;
-    border-bottom: 1px solid $border-color;
+    padding: 0px 10px;
+    color: white;
 }
 
 .post-title{
@@ -94,21 +121,18 @@ a{
 }
 
 .post-date{
-    font-size: 90%;
-    color: #a4a4a4;
-    float: right;
+    font-size: 80%;
+    color: $secondary-text-color;
 }
 
 .post-body{
-    padding: 10px;
-    background: #fafafa;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding: 0px 10px;
 }
 
 
 form{
     margin: 0 auto;
+    margin-top: 20px;
     text-align: center;
     width: 200px;
     padding: 20px;
