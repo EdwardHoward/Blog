@@ -20,6 +20,7 @@ try{
 mongoose.connect(config.mongoAddress);
 
 
+
 app.use(session({
     resave: false,
     saveUninitialized: true,
@@ -65,6 +66,7 @@ app.use(function(req, res, next){
     
     return;
 })
+
 
 function checkAuth(req, res, next){
     if(!req.session.user_id){

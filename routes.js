@@ -15,14 +15,6 @@ function renderPosts(req, res, query, showHome){
             showActions: true,
             showHome: showHome,
             helpers: {
-                createTitleLink: function(title){
-                    var ta = title.replace(/\s/g, '-');
-                    return ta;
-                },
-                toUpperCase: function(title){
-                    title = title.replace(/(\b[a-z](?!\s))/g, function(x){ return x.toUpperCase(); });
-                    return title;
-                },
                 formatDate: function(date){
                     var str = Moment(date).format("MMMM Do YYYY");
                     return str;
@@ -55,7 +47,8 @@ module.exports = {
         }
         
         var postObject = {
-            title: sanitize(post.title.toLowerCase()),
+            title: sanitize(post.title),
+            path: sanitize(post.title).toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9 -]/g, ''),
             body: sanitize(post.body),
             creator: req.session.user_id
         }
@@ -67,7 +60,8 @@ module.exports = {
 
             Model.Post.findOne({_id: Mongoose.Types.ObjectId(post.id)}, function(err, p){
                if(!err && p != null){
-                p.title = sanitize(post.title.toLowerCase());
+                p.title = sanitize(post.title);
+                p.path = sanitize(post.title).toLowerCase().replace(/\s/g, '-').replace(/[^a-zA-Z0-9 -]/g, '');
                 p.body = sanitize(post.body);
                 
                 p.save();
@@ -80,7 +74,6 @@ module.exports = {
         res.redirect('/');
     },
     removePost: function(req, res){
-        console.log(req.params.postid);
         Model.Post.findOne({_id: req.params.postid}, function(err, post){
             if(!err && post != null){
                 if(post.creator == req.session.user_id){
@@ -104,8 +97,8 @@ module.exports = {
         });
     },
     getPostByName: function(req, res){
-        var name = req.params.posttitle.replace('-', ' ');
-        renderPosts(req, res, {title: name}, true);
+        //var name = req.params.posttitle.replace('-', ' ');
+        renderPosts(req, res, {path: req.params.posttitle}, true);
     },
     searchPostsByName: function(req, res){
         var name = req.params.query.replace('-', ' ');

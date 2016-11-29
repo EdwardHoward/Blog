@@ -9,6 +9,7 @@ var User = mongoose.model('User', {
 
 var Post = mongoose.model('Post', {
     title: String,
+    path: String,
     body: String,
     date: {type: Date, default: Date.now },
     creator: Schema.Types.ObjectId
