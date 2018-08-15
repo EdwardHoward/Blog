@@ -1,3 +1,4 @@
+node_modules
 config.js
 static/.sass-cache
 static/css/.sass-cache
