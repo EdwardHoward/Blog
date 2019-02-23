@@ -67,8 +67,7 @@ a{
 
 .post{
     border-radius: 5px;
-    padding: 20px;
-    padding-bottom: 10px;
+    padding: .5rem;
     box-shadow: 0 4px 2px -2px lightgrey;
     margin-bottom: 20px;
     background: white;
@@ -85,14 +84,12 @@ a{
     }
     
     .action{
-        padding: 5px 5px;
-        //width: 100%;
+        padding: .5rem;
         text-align: right;
         border: 1px solid $border-color;
         background: #f6f6f6;
         border-radius: 5px;
         
-
         a {
             color: #ff4c4c;
             border-color: #ff8181;
@@ -111,7 +108,6 @@ a{
 }
 
 .title-content {
-    padding: 0px 10px;
     color: white;
 }
 
@@ -125,10 +121,9 @@ a{
     color: $secondary-text-color;
 }
 
-.post-body{
-    padding: 0px 10px;
+.post-content{
+   padding: 1rem;
 }
-
 
 form{
     margin: 0 auto;
@@ -146,7 +141,6 @@ form{
     
     input, form textarea{
         margin-top: 10px;
-        text-align: center;
     }
     
     textarea{

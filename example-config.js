@@ -1,6 +1,5 @@
 module.exports = {
     sessionSecret: '',
     port: 3030,
-    ip: '',
-    mongoAddress: '' 
+    mongoAddress: 'mongodb://mongo:27017'
 }

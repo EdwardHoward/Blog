@@ -1,5 +1,6 @@
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 body, html {
   padding: 0px;
@@ -7,11 +8,13 @@ body, html {
   background: #f9f9f9;
   height: 100%;
   box-sizing: border-box;
-  font-family: 'Noto Sans', sans-serif; }
+  font-family: "Noto Sans", sans-serif;
+}
 
 a {
   text-decoration: none;
-  color: #4c72ff; }
+  color: #4c72ff;
+}
 
 .header {
   width: 100%;
@@ -19,76 +22,92 @@ a {
   height: 50px;
   line-height: 50px;
   padding: 0px 20px;
-  border-bottom: 1px solid #cdcdcd; }
+  border-bottom: 1px solid #cdcdcd;
+}
 
 .action {
   float: right;
-  font-size: 120%; }
-  .action a {
-    border: 2px solid #819bff;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    display: inline-block;
-    line-height: 30px;
-    padding-top: 4px;
-    border-radius: 5px;
-    margin-left: 10px; }
-    .action a:first-child {
-      margin-left: 0px; }
-    .action a:hover {
-      background: #f0f0f0; }
-    .action a .fa {
-      display: block; }
+  font-size: 120%;
+}
+.action a {
+  border: 2px solid #819bff;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  display: inline-block;
+  line-height: 30px;
+  padding-top: 4px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.action a:first-child {
+  margin-left: 0px;
+}
+.action a:hover {
+  background: #f0f0f0;
+}
+.action a .fa {
+  display: block;
+}
 
 .content {
   width: 80%;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .post {
   border-radius: 5px;
-  padding: 20px;
-  padding-bottom: 10px;
+  padding: 0.5rem;
   box-shadow: 0 4px 2px -2px lightgrey;
   margin-bottom: 20px;
   background: white;
   border: 1px solid #ececec;
-  border-bottom: none; }
-  .post:last-child {
-    margin-bottom: 0px;
-    border-bottom: none; }
-  .post:first-child {
-    margin-top: 20px; }
-  .post .action {
-    padding: 5px 5px;
-    text-align: right;
-    border: 1px solid #dcdcdc;
-    background: #f6f6f6;
-    border-radius: 5px; }
-    .post .action a {
-      color: #ff4c4c;
-      border-color: #ff8181;
-      margin-left: 5px; }
-      .post .action a:first-child {
-        margin-left: 0px; }
-      .post .action a.edit-post {
-        color: #4c72ff;
-        border-color: #819bff; }
+  border-bottom: none;
+}
+.post:last-child {
+  margin-bottom: 0px;
+  border-bottom: none;
+}
+.post:first-child {
+  margin-top: 20px;
+}
+.post .action {
+  padding: 0.5rem;
+  text-align: right;
+  border: 1px solid #dcdcdc;
+  background: #f6f6f6;
+  border-radius: 5px;
+}
+.post .action a {
+  color: #ff4c4c;
+  border-color: #ff8181;
+  margin-left: 5px;
+}
+.post .action a:first-child {
+  margin-left: 0px;
+}
+.post .action a.edit-post {
+  color: #4c72ff;
+  border-color: #819bff;
+}
 
 .title-content {
-  padding: 0px 10px;
-  color: white; }
+  color: white;
+}
 
 .post-title {
   font-weight: bold;
-  font-size: 150%; }
+  font-size: 150%;
+}
 
 .post-date {
   font-size: 80%;
-  color: #a4a4a4; }
+  color: #a4a4a4;
+}
 
-.post-body {
-  padding: 0px 10px; }
+.post-content {
+  padding: 1rem;
+}
 
 form {
   margin: 0 auto;
@@ -98,37 +117,46 @@ form {
   padding: 20px;
   border-radius: 5px;
   border: 1px solid #dcdcdc;
-  background: #f6f6f6; }
-  form input:not([type="submit"]), form form textarea {
-    width: 100%; }
-  form input, form form textarea {
-    margin-top: 10px;
-    text-align: center; }
-  form textarea {
-    height: 200px;
-    text-align: left;
-    width: 100%;
-    margin-top: 10px; }
+  background: #f6f6f6;
+}
+form input:not([type=submit]), form form textarea {
+  width: 100%;
+}
+form input, form form textarea {
+  margin-top: 10px;
+}
+form textarea {
+  height: 200px;
+  text-align: left;
+  width: 100%;
+  margin-top: 10px;
+}
 
 .submit {
-  text-align: right; }
-  .submit input {
-    padding-left: 10px;
-    padding-right: 10px; }
+  text-align: right;
+}
+.submit input {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
 .login-form {
-  width: 200px; }
+  width: 200px;
+}
 
 .post-form {
   max-width: 400px;
-  width: 100%; }
-  .post-form input {
-    text-align: left; }
+  width: 100%;
+}
+.post-form input {
+  text-align: left;
+}
 
 .options {
   text-align: right;
   font-size: 90%;
-  padding: 5px; }
+  padding: 5px;
+}
 
 .clearfix:after {
   content: " ";
@@ -136,16 +164,20 @@ form {
   visibility: hidden;
   display: block;
   height: 0;
-  clear: both; }
+  clear: both;
+}
 
 @media (max-width: 1024px) {
   .content {
     width: 100%;
     padding: 5px;
     padding-top: 20px;
-    padding-bottom: 20px; }
+    padding-bottom: 20px;
+  }
 
   .header {
-    padding: 0px 10px; } }
+    padding: 0px 10px;
+  }
+}
 
 /*# sourceMappingURL=main.css.map */

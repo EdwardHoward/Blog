@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 var User = mongoose.model('User', {
     name: String,
     date: {type: Date, default: Date.now },
-    password: String
+    password: String,
+    salt: String
 });
 
 var Post = mongoose.model('Post', {

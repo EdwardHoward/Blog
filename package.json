@@ -3,19 +3,23 @@
   "version": "1.0.0",
   "description": "A simple blog",
   "main": "server.js",
-  "dependencies":{
-    "express": "4.13.4",
-    "mongoose": "4.6.3",
-    "moment": "2.15.1",
-    "express-session": "1.14.1",
-    "body-parser": "1.15.2",
-    "express-handlebars": "3.0.0",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.1",
+    "express-session": "^1.15.6",
+    "markdown": "^0.5.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.15",
+    "nodemon": "^1.18.10",
     "password-hash": "1.2.2",
-    "markdown": "0.5.0",
-    "sanitize-html": "1.13.0"
+    "pwd": "^1.1.0",
+    "sanitize-html": "^1.20.0",
+    "sass": "^1.17.2"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server -L",
+    "sass": "sass static/css/main.scss static/css/main.css"
   },
   "author": "Edward Howard <edwardhoward11@gmail.com>",
   "license": "ISC"
